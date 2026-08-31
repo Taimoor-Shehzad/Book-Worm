@@ -5,6 +5,7 @@ const CreateAuthStyles = () => {
   const styles = StyleSheet.create({
     container: {
       backgroundColor: COLORS.background,
+      flex: 1,
     },
   });
 
