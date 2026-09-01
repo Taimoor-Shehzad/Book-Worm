@@ -5,6 +5,7 @@ import {
   Pressable,
   Text,
   TextInput,
+  TouchableOpacity,
   View,
 } from "react-native";
 import CreateAuthStyles from "@/assets/Styles/auth.styles";
@@ -87,7 +88,7 @@ export default function Index() {
               </View>
             </View>
           </View>
-          <Pressable style={styles.submitButton}>
+          <TouchableOpacity style={styles.submitButton}>
             {isLoading ? (
               <ActivityIndicator color={"#fff"} />
             ) : (
@@ -100,7 +101,7 @@ export default function Index() {
                 Login
               </Text>
             )}
-          </Pressable>
+          </TouchableOpacity>
           <View style={styles.linkTextContainer}>
             <Text>Don't have an account?</Text>
             <Link style={styles.linkText} href="./signup">

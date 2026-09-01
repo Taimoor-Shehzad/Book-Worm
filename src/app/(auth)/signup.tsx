@@ -1,10 +1,12 @@
 import { Link } from "expo-router";
 import {
   ActivityIndicator,
+  Alert,
   Image,
   Pressable,
   Text,
   TextInput,
+  TouchableOpacity,
   View,
 } from "react-native";
 import CreateAuthStyles from "@/assets/Styles/auth.styles";
@@ -12,15 +14,23 @@ import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "../../../constants/colors";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useState } from "react";
+import { useAuthStore } from "../../../store/authStore";
 
 const signup = () => {
   const styles = CreateAuthStyles();
   const [isHidden, setIsHidden] = useState(true);
   const [email, setEmail] = useState("");
-  const [passsword, setPassword] = useState("");
-  const [fullName, setFullName] = useState("");
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const { register, isLoading } = useAuthStore();
+  const handleSignup = async () => {
+    const result = await register(username, email, password);
+    if (!result.success) {
+      Alert.alert("Error", `${result.error}`);
+    }
+  };
+
   return (
     <KeyboardAwareScrollView
       style={{ flex: 1 }}
@@ -53,8 +63,8 @@ const signup = () => {
                     placeholder="Enter your Full Name"
                     placeholderTextColor={COLORS.textSecondary}
                     autoCapitalize="none"
-                    value={fullName}
-                    onChangeText={setFullName}
+                    value={username}
+                    onChangeText={setUsername}
                   />
                 </View>
               </View>
@@ -97,7 +107,7 @@ const signup = () => {
                     placeholder="Enter your password"
                     placeholderTextColor={COLORS.textSecondary}
                     secureTextEntry={isHidden ? true : false}
-                    value={passsword}
+                    value={password}
                     onChangeText={setPassword}
                   />
                 </View>
@@ -116,7 +126,12 @@ const signup = () => {
               </View>
             </View>
           </View>
-          <Pressable style={styles.submitButton}>
+          <TouchableOpacity
+            style={styles.submitButton}
+            onPress={() => {
+              handleSignup();
+            }}
+          >
             {isLoading ? (
               <ActivityIndicator color={"#fff"} />
             ) : (
@@ -129,7 +144,7 @@ const signup = () => {
                 Sign Up
               </Text>
             )}
-          </Pressable>
+          </TouchableOpacity>
           <View style={styles.linkTextContainer}>
             <Text>Already have an account?</Text>
             <Link style={styles.linkText} href="/">
