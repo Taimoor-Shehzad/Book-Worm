@@ -1,13 +1,96 @@
 import { Link } from "expo-router";
-import { Text, View } from "react-native";
+import { Image, Pressable, Text, TextInput, View } from "react-native";
 import CreateAuthStyles from "@/assets/Styles/auth.styles";
+import { Ionicons } from "@expo/vector-icons";
+import { COLORS } from "../../../constants/colors";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { useState } from "react";
 
 export default function Index() {
   const styles = CreateAuthStyles();
+  const [isHidden, setIsHidden] = useState(true);
   return (
-    <View style={styles.container}>
-      <Text>Edit src/app/index.tsx to edit this screen.</Text>
-      <Link href="./signup">SignUp</Link>
-    </View>
+    <KeyboardAwareScrollView
+      style={{ flex: 1 }}
+      contentContainerStyle={{ flexGrow: 1 }}
+      enableOnAndroid={true}
+      enableAutomaticScroll={true}
+    >
+      <View style={styles.container}>
+        <Image style={styles.image} source={require("@/assets/images/i.png")} />
+        <View style={styles.mainContainer}>
+          <View>
+            <View style={styles.mainInputContainer}>
+              <Text style={styles.inputTitle}>Email</Text>
+              <View style={styles.inputContainer}>
+                <View style={styles.center}>
+                  <Ionicons
+                    name="mail-outline"
+                    size={19}
+                    color={COLORS.primary}
+                  />
+                </View>
+                <View style={styles.inputBox}>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Enter your email"
+                    placeholderTextColor={COLORS.textSecondary}
+                    autoCapitalize="none"
+                  />
+                </View>
+              </View>
+            </View>
+            <View style={styles.mainInputContainer}>
+              <Text style={styles.inputTitle}>Password</Text>
+              <View style={styles.inputContainer}>
+                <View style={styles.center}>
+                  <Ionicons
+                    name="lock-closed-outline"
+                    size={19}
+                    color={COLORS.primary}
+                  />
+                </View>
+                <View style={[styles.center]}>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Enter your password"
+                    placeholderTextColor={COLORS.textSecondary}
+                    secureTextEntry={isHidden ? true : false}
+                  />
+                </View>
+                <Pressable
+                  style={[styles.center, styles.eyeIcon]}
+                  onPress={() => {
+                    setIsHidden(!isHidden);
+                  }}
+                >
+                  <Ionicons
+                    name={isHidden ? "eye-off-outline" : "eye-outline"}
+                    size={19}
+                    color={COLORS.primary}
+                  />
+                </Pressable>
+              </View>
+            </View>
+          </View>
+          <Pressable style={styles.submitButton}>
+            <Text
+              style={{
+                color: COLORS.white,
+                fontWeight: "bold",
+              }}
+            >
+              Login
+            </Text>
+          </Pressable>
+          <View style={styles.linkTextContainer}>
+            <Text>Don't have an account?</Text>
+            <Link style={styles.linkText} href="./signup">
+              Sign Up
+            </Link>
+          </View>
+        </View>
+      </View>
+    </KeyboardAwareScrollView>
   );
 }
