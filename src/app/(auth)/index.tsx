@@ -1,5 +1,12 @@
 import { Link } from "expo-router";
-import { Image, Pressable, Text, TextInput, View } from "react-native";
+import {
+  ActivityIndicator,
+  Image,
+  Pressable,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 import CreateAuthStyles from "@/assets/Styles/auth.styles";
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "../../../constants/colors";
@@ -9,6 +16,9 @@ import { useState } from "react";
 export default function Index() {
   const styles = CreateAuthStyles();
   const [isHidden, setIsHidden] = useState(true);
+  const [email, setEmail] = useState("");
+  const [passsword, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   return (
     <KeyboardAwareScrollView
       style={{ flex: 1 }}
@@ -36,6 +46,8 @@ export default function Index() {
                     placeholder="Enter your email"
                     placeholderTextColor={COLORS.textSecondary}
                     autoCapitalize="none"
+                    value={email}
+                    onChangeText={setEmail}
                   />
                 </View>
               </View>
@@ -56,6 +68,8 @@ export default function Index() {
                     placeholder="Enter your password"
                     placeholderTextColor={COLORS.textSecondary}
                     secureTextEntry={isHidden ? true : false}
+                    value={passsword}
+                    onChangeText={setPassword}
                   />
                 </View>
                 <Pressable
@@ -74,14 +88,18 @@ export default function Index() {
             </View>
           </View>
           <Pressable style={styles.submitButton}>
-            <Text
-              style={{
-                color: COLORS.white,
-                fontWeight: "bold",
-              }}
-            >
-              Login
-            </Text>
+            {isLoading ? (
+              <ActivityIndicator color={"#fff"} />
+            ) : (
+              <Text
+                style={{
+                  color: COLORS.white,
+                  fontWeight: "bold",
+                }}
+              >
+                Login
+              </Text>
+            )}
           </Pressable>
           <View style={styles.linkTextContainer}>
             <Text>Don't have an account?</Text>

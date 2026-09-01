@@ -9,6 +9,7 @@ const CreateAuthStyles = () => {
       padding: 28,
       justifyContent: "center",
       alignItems: "center",
+      flexGrow: 1,
     },
     image: {
       resizeMode: "contain",
@@ -25,7 +26,7 @@ const CreateAuthStyles = () => {
 
     mainInputContainer: {
       marginBottom: 10,
-      gap: 6,
+      gap: 9,
     },
 
     inputTitle: {
@@ -40,7 +41,7 @@ const CreateAuthStyles = () => {
       paddingHorizontal: 10,
       paddingRight: 14,
       borderRadius: 10,
-      gap: 6,
+      gap: 9,
       overflow: "hidden",
     },
 
@@ -85,6 +86,23 @@ const CreateAuthStyles = () => {
     linkText: {
       color: COLORS.primary,
       fontWeight: "bold",
+    },
+
+    signupHeader: {
+      justifyContent: "center",
+      alignItems: "center",
+      width: "100%",
+      marginBottom: 26,
+    },
+
+    mainTitle: {
+      color: COLORS.primary,
+      fontFamily: "JetBrainsMono-Medium",
+      fontSize: 25,
+    },
+    titleCaption: {
+      color: COLORS.textSecondary,
+      fontSize: 15,
     },
   });
 
