@@ -42,7 +42,7 @@ export const useAuthStore = create((set) => ({
 
       set({ user: data.user, token: data.token, isLoading: false });
 
-      router.navigate('/(root)/homePage')
+      router.navigate('/(tabs)/home')
       return {
         success: true,
       };
@@ -85,7 +85,7 @@ export const useAuthStore = create((set) => ({
 
       set({ user: data.user, token: data.token, isLoading: false });
 
-      router.navigate('/(root)/homePage')
+      router.navigate('/(tabs)/home')
       return {
         success: true,
       };
