@@ -1,6 +1,7 @@
 import { Link } from "expo-router";
 import {
   ActivityIndicator,
+  Alert,
   Image,
   Pressable,
   Text,
@@ -13,13 +14,23 @@ import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "../../../constants/colors";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useState } from "react";
+import { useAuthStore } from "../../../store/authStore";
 
 export default function Index() {
   const styles = CreateAuthStyles();
   const [isHidden, setIsHidden] = useState(true);
   const [email, setEmail] = useState("");
-  const [passsword, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [password, setPasword] = useState("");
+
+  const { login, isLoading, token, user, checkAuth } = useAuthStore();
+
+  const handleLogin = async () => {
+    const result = await login(email, password);
+    if (!result.success) {
+      Alert.alert("Error", result.error);
+    }
+  };
+
   return (
     <KeyboardAwareScrollView
       style={{ flex: 1 }}
@@ -69,8 +80,8 @@ export default function Index() {
                     placeholder="Enter your password"
                     placeholderTextColor={COLORS.textSecondary}
                     secureTextEntry={isHidden ? true : false}
-                    value={passsword}
-                    onChangeText={setPassword}
+                    value={password}
+                    onChangeText={setPasword}
                   />
                 </View>
                 <Pressable
@@ -88,7 +99,12 @@ export default function Index() {
               </View>
             </View>
           </View>
-          <TouchableOpacity style={styles.submitButton}>
+          <TouchableOpacity
+            style={styles.submitButton}
+            onPress={() => {
+              handleLogin();
+            }}
+          >
             {isLoading ? (
               <ActivityIndicator color={"#fff"} />
             ) : (
