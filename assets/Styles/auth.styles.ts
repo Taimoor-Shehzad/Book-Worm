@@ -6,7 +6,7 @@ const CreateAuthStyles = () => {
     container: {
       backgroundColor: COLORS.background,
       flex: 1,
-      padding: 28,
+      padding: 22,
       justifyContent: "center",
       alignItems: "center",
       flexGrow: 1,

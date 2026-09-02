@@ -2,8 +2,8 @@ import { create } from "zustand";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Platform } from "react-native";
 
-const API_BASE_URL =
-  Platform.OS === "android" ? "http://10.0.2.2:3000" : "http://localhost:3000";
+const API_BASE_URL = "https://book-worm-backend-ex7m.onrender.com/api/"
+  // Platform.OS === "android" ? "http://10.0.2.2:3000" : "http://localhost:3000";
 
 export const useAuthStore = create((set) => ({
   user: null,
@@ -13,7 +13,7 @@ export const useAuthStore = create((set) => ({
   register: async(username,email,password)=>{
     set({isLoading: true})
     try {
-      const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
+      const response = await fetch(`${API_BASE_URL}auth/register`, {
         method: "POST",
         headers:{
           "Content-Type": "application/json"
@@ -26,9 +26,10 @@ export const useAuthStore = create((set) => ({
         }
       )
 
-      const data=await response.json()
-      if(!response.ok){
-        throw new Error(data.message || 'Something went wrong')
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        const errorMessage = data?.error?.message || data?.message || 'Something went wrong';
+        throw new Error(errorMessage);
       }
 
       try {
