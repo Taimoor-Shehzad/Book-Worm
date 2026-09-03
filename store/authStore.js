@@ -2,8 +2,7 @@ import { create } from "zustand";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Platform } from "react-native";
 import { router } from "expo-router";
-
-const API_BASE_URL = "https://book-worm-backend-ex7m.onrender.com/api/"
+import { API_URL } from "../constants/api";
   // Platform.OS === "android" ? "http://10.0.2.2:3000" : "http://localhost:3000";
 
 export const useAuthStore = create((set) => ({
@@ -14,7 +13,7 @@ export const useAuthStore = create((set) => ({
   register: async(username,email,password)=>{
     set({isLoading: true})
     try {
-      const response = await fetch(`${API_BASE_URL}auth/register`, {
+      const response = await fetch(`${API_URL}/auth/register`, {
         method: "POST",
         headers:{
           "Content-Type": "application/json"
@@ -58,7 +57,7 @@ export const useAuthStore = create((set) => ({
   login: async(email,password)=>{
     set({isLoading: true})
     try {
-      const response = await fetch(`${API_BASE_URL}auth/login`, {
+      const response = await fetch(`${API_URL}/auth/login`, {
         method: "POST",
         headers:{
           "Content-Type": "application/json"
