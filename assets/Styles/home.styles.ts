@@ -93,6 +93,25 @@ const CreateHomeStyles = () => {
       color: COLORS.placeholderText,
       fontSize: 14,
     },
+
+    emptyContainer: {
+      alignItems: "center",
+      justifyContent: "center",
+      padding: 40,
+      marginTop: 40,
+    },
+    emptyText: {
+      fontSize: 18,
+      fontWeight: "600",
+      color: COLORS.textPrimary,
+      marginTop: 16,
+      marginBottom: 8,
+    },
+    emptySubtext: {
+      fontSize: 14,
+      color: COLORS.textSecondary,
+      textAlign: "center",
+    },
   });
 
   return styles;
