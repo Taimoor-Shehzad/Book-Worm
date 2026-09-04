@@ -28,7 +28,7 @@ const Create = () => {
   const [imageBase64, setImageBase64] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const styles = CreateCreateStyles();
-  const { token } = useAuthStore();
+  const { token, logout } = useAuthStore();
 
   const renderRating = () => {
     const stars = [];
@@ -87,12 +87,19 @@ const Create = () => {
       return;
     }
 
+    if (!token) {
+      Alert.alert("Session expired", "Please log in again before posting.");
+      return;
+    }
+
     try {
       setLoading(true);
 
       const uriParts = image?.split(".");
       const fileType = uriParts?.[uriParts.length - 1];
-      const imageType = fileType ? `image/&{fileType.toString}` : "image/jpeg";
+      const imageType = fileType
+        ? `image/${fileType.toLowerCase()}`
+        : "image/jpeg";
 
       const imageDataUrl = `data:${imageType};base64,${imageBase64}`;
 
@@ -100,7 +107,7 @@ const Create = () => {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "Application/json",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           title,
@@ -113,7 +120,13 @@ const Create = () => {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || "Something went wrong");
+        if (response.status === 401) {
+          await logout();
+          throw new Error("Your session has expired. Please log in again.");
+        }
+        throw new Error(
+          data.message || `Post creation failed (${response.status})`,
+        );
       }
 
       Alert.alert("Success", "Your book recommendation has been posted");
