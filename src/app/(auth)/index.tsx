@@ -22,7 +22,8 @@ export default function Index() {
   const [email, setEmail] = useState("");
   const [password, setPasword] = useState("");
 
-  const { login, isLoading, token, user, checkAuth } = useAuthStore();
+  const { login, isLoading, token, user, checkAuth, isCheckingAuth } =
+    useAuthStore();
 
   const handleLogin = async () => {
     const result = await login(email, password);
@@ -30,6 +31,10 @@ export default function Index() {
       Alert.alert("Error", result.error);
     }
   };
+
+  if (isCheckingAuth) {
+    return null;
+  }
 
   return (
     <KeyboardAwareScrollView

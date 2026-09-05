@@ -86,7 +86,7 @@ const CreateHomeStyles = () => {
     headerTitle: {
       color: COLORS.primary,
       fontSize: 24,
-      fontWeight: "bold",
+      fontFamily: "JetBrainsMono-Medium",
     },
 
     headerCaption: {
