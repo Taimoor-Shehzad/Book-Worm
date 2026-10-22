@@ -1,56 +1,94 @@
-# Welcome to your Expo app 👋
+# Book-Worm
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Book-Worm is a modern Expo + React Native app for discovering, saving, and managing books in a clean, mobile-first experience.
 
-## Get started
+## Overview
 
-1. Install dependencies
+This project is built to help readers keep track of books they want to read, are currently reading, or have finished. It combines a polished UI with a lightweight state architecture to make the app fast, flexible, and easy to extend.
 
-   ```bash
-   npm install
-   ```
+## Features
 
-2. Start the app
+- Book discovery and browsing
+- Favorites and reading-list management
+- Clean, responsive mobile user interface
+- Built with Expo Router for modern app navigation
+- TypeScript support for maintainable code
+- Zustand-powered state management
+- Reanimated-based motion and UX polish
 
-   ```bash
-   npx expo start
-   ```
+## Tech Stack
 
-In the output, you'll find options to open the app in a
+- React Native
+- Expo
+- TypeScript
+- Zustand
+- AsyncStorage
+- Expo Router
+- Reanimated
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Getting Started
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+### Prerequisites
 
-## Get a fresh project
+- Node.js 18+
+- npm or yarn
+- Expo Go app on a mobile device, or an Android/iOS emulator
 
-When you're ready, run:
+### Installation
 
 ```bash
-npm run reset-project
+npm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### Run the app
 
-### Other setup steps
+```bash
+npm run start
+```
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+Then choose one of the available options from the Expo terminal:
 
-## Learn more
+- Android emulator
+- iOS simulator
+- Physical device via Expo Go
+- Web preview
 
-To learn more about developing your project with Expo, look at the following resources:
+You can also run platform-specific commands:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```bash
+npm run android
+npm run ios
+npm run web
+```
 
-## Join the community
+## Project Structure
 
-Join our community of developers creating universal apps.
+```text
+Book-Worm/
+├── app/                # Screens and routes
+├── assets/             # Images, fonts, and other static assets
+├── components/         # Reusable UI components
+├── hooks/              # Custom React hooks
+├── stores/             # Zustand stores
+├── scripts/            # Utility scripts
+├── package.json        # Project metadata and scripts
+├── tsconfig.json       # TypeScript configuration
+└── app.json            # Expo configuration
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## Contributing
+
+Contributions are welcome. To contribute:
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Open a pull request with a clear description
+
+## License
+
+This project is licensed under the MIT License.
+
+## Author
+
+Taimoor Shehzad
